@@ -1,0 +1,82 @@
+<!doctype html>
+
+<html>
+	<head>
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+  crossorigin=""/>
+	<!-- print plugin -->
+
+	<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+
+	<style>
+		#map {
+			height: 100vh;
+		}
+		h1{
+			height: 30px;
+			background-color: burlywood;
+		}
+	</style>
+	</head>
+	<body>
+		<div id="map"></div>
+		<h1>scroll down/താഴേക്ക് സ്ക്രോൾ ചെയ്യുക/கீழே உருட்டவும்కిందకి జరుపు</h1>
+	</body>
+	<script src="../lib/leaflet.browser.print.min.js"></script>
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+  integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+  crossorigin=""></script>
+	<script src="../lib/leaflet.browser.print.min.js"></script>
+	
+
+  <script>
+		
+
+	var googleSat = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+    maxZoom: 20,
+    subdomains:['mt0','mt1','mt2','mt3']
+});
+
+	
+
+	var key = '95c24917f8cc445dad4ea6113a933807';
+	var pressureTile = 'https://tile.openweathermap.org/map/pressure_new/0/0/0.png?appid=' + key;
+
+	var windSpeedTile = 'https://tile.openweathermap.org/map/wind_new/0/0/0.png?appid=' + key;
+
+	var temperatureTile = 'https://tile.openweathermap.org/map/temp_new/0/0/0.png?appid=' + key;
+
+	var pressure = L.tileLayer(pressureTile, {id: 'map', tileSize: 512, zoomOffset: -1, attribution: 'Pressure'}),
+    windspeed   = L.tileLayer(windSpeedTile, {id: 'map', tileSize: 512, zoomOffset: -1, attribution: 'Wind Speed'}),
+	temp = L.tileLayer(windSpeedTile, {id: 'map', tileSize: 512, zoomOffset: -1, attribution: 'Temperature'}),
+
+	defaultMap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 18, attribution: 'Street'
+	});
+
+	const map = L.map('map', {
+		center: [39.73, -104.99],
+		zoom: 14,
+		layers: [defaultMap,googleSat]
+	});
+
+	var baseMap = {
+		Pressure: pressure,
+		Windspeed: windspeed,
+		Temperature: temp
+	};
+
+	var overlayMap = {
+		Satellite: googleSat,
+		
+		
+	};
+
+	L.control.layers(baseMap, overlayMap).addTo(map);
+	// print plugin
+	L.control.browserPrint({position: 'bottomleft'}).addTo(map);
+
+  </script>
+</html>

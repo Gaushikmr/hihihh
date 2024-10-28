@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en" >
+    <head>
+        <meta charset="UTF-8" />
+        <title>Charts</title>
+
+        <!-- Bootstrap CSS -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+            crossorigin="anonymous"
+        />
+        <!-- bootstrap icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+
+        
+
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='styles.css') }}"
+        />
+
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </head>
+    <body>
+        
+<!-- chart-section-wrapper -->
+    <div id="chart-section-wrapper" class="container">
+        <div id="chart-section" class="row">
+                
+            <!-- Buttons -->
+            <div id="chart-selector-buttons" class="col-3 align-self-top">
+                <!-- <div class="overall-btns col my-3">   -->
+                <!-- set-1 -->     
+              <div id="buttonset1" style="display:grid;">  
+                <button class="selector-button"                                  data-show-element="#temperature_charts"
+                >
+                <i class="icon bi bi-thermometer-sun"></i>
+                <span>Temp</span>
+                </button>
+
+                            
+                <button
+                 class="selector-button"
+                 data-show-element="#pressure_charts"
+                >
+                <i class="icon bi bi-speedometer2"></i>
+                <span>Pressure</span>
+                </button>
+
+                <button 
+                class="selector-button"
+                data-show-element="#humidity_charts"                    
+                >
+                <i class="icon bi bi-droplet-half"></i>
+                <span>Humidity</span>
+                </button>  
+                <!--  -->
+                <button 
+                class="selector-button"
+                data-show-element="#hourly_airTemperature_chart"                    
+                >
+                <i class="icon bi bi-droplet-half"></i>
+                <span>Air-temp</span>
+                </button>          
+                    
+
+
+                <button 
+                class="selector-button"
+                data-show-element="#humidity_charts"                    
+                >
+                <i class="icon bi bi-droplet-half"></i>
+                <span>Button-2</span>
+                </button>  
+                <button 
+                class="selector-button"
+                data-show-element="#humidity_charts"                    
+                >
+                <i class="icon bi bi-droplet-half"></i>
+                <span>Button-3</span>
+                </button>  
+                </div>   
+                
+                 <!-- set-2 -->     
+              <div id="buttonset2" style="display:none;">  
+                <button class="selector-button"                                  data-show-element=""
+                >
+                <i class="icon bi bi-thermometer-sun"></i>
+                <span>Button-4</span>
+                </button>
+
+                            
+                <button
+                 class="selector-button"
+                 data-show-element=""
+                >
+                <i class="icon bi bi-speedometer2"></i>
+                <span>Button-5</span>
+                </button>
+
+                <button 
+                class="selector-button"
+                data-show-element=""                    
+                >
+                <i class="icon bi bi-droplet-half"></i>
+                <span>Button-6</span>
+                </button>  
+                <button 
+                class="selector-button"
+                data-show-element=""                    
+                >
+                <i class="icon bi bi-droplet-half"></i>
+                <span>Button-7</span>
+                </button> 
+                <button 
+                class="selector-button"
+                data-show-element=""                    
+                >
+                <i class="icon bi bi-droplet-half"></i>
+                <span>Button-8</span>
+                </button> 
+                <button 
+                class="selector-button"
+                data-show-element=""                    
+                >
+                <i class="icon bi bi-droplet-half"></i>
+                <span>Button-9</span>
+                </button> 
+            </div>   
+            <!-- control buttons -->  
+            <div class="btn-controls">  
+                <!-- Next-btn --> 
+                <div class="next-button-parent text-right mb-3">
+                    <button  type="button"
+                    class="btn btn-control-2" onclick="show_button_set('+')" class="next-button" id="next-button" >Next </button>
+                </div>
+                <!-- prev-btn -->
+                <div class="prev-button-parent text-right mb-3">
+                    <button  type="button"
+                    class="btn btn-control-1" onclick="show_button_set('-')" class="prev-button" id="prev-button" >Prev </button>
+                </div>
+            </div>
+        </div>
+                
+                <!-- chart container -->
+                <div class="chart-container col-9" style="box-shadow: 0 2px 4px 0 rgb(62 57 107 / 30%); background-color: #f9f9fb;margin-top: 50px;height: 520px;border-radius: 15px;">
+
+                    <div class="row">
+                        <!-- Temperature chart -->
+                        <div id="temperature_charts" class="col-lg-12 my-4">
+                            <div class="card mb-30" style="background-color: #f9f9fb;border: none;align-items: flex-end;">
+                                <div
+                                    class="card-body pb-1 d-flex justify-content-between"
+                                >
+                                    <!-- <h4 class="font-20">Temperature Chart</h4> -->
+                                    <div class="btn-group" role="group">
+                                        <button
+                                            type="button"
+                                            class="btn btn-custom1"
+                                            data-show-element="#weekely_temp_chart"
+                                        >
+                                            WEEKELY
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="btn btn-custom2"
+                                            data-show-element="#hourly_temp_chart"
+                                        >
+                                            HOURLY
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-sm-3">
+                                <div id="weekely_temp_chart"></div>
+                                <div id="hourly_temp_chart" class="hide"></div>
+                            </div>
+                        </div>
+
+                        <!--Pressure Chart  -->
+                        <div id="pressure_charts" class="hide col-lg-12 my-4">
+                           <div class="card mb-30" style="background-color: #f9f9fb;border: none;align-items: flex-end;">
+                                <div
+                                    class="card-body pb-1 d-flex justify-content-between"
+                                >
+                                    <!-- <h4 class="font-20">Pressure Chart</h4> -->
+                                    <div class="btn-group" role="group">
+                                        <button
+                                            type="button"
+                                            class="btn btn-custom1"
+                                            data-show-element="#weekely_pressure_chart"
+                                        >
+                                            WEEKELY
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="btn btn-custom2"
+                                            data-show-element="#hourly_pressure_chart"
+                                        >
+                                            HOURLY
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-sm-3">
+                                <div id="weekely_pressure_chart"></div>
+                                <div
+                                    id="hourly_pressure_chart"
+                                    class="hide"
+                                ></div>
+                            </div>
+                        </div>
+                        <!-- Humidity chart -->
+                        <div id="humidity_charts" class="hide col-lg-12 my-4">
+                            <div class="card mb-30" style="background-color: #f9f9fb;border: none;align-items: flex-end;">
+                                <div
+                                    class="card-body pb-1 d-flex justify-content-between"
+                                >
+                                    <!-- <h4 class="font-20">Humidity Chart</h4> -->
+                                    <div class="btn-group" role="group">
+                                        <button
+                                            type="button"
+                                            class="btn btn-custom1"
+                                            data-show-element="#weekely_humidity_chart"
+                                        >
+                                            WEEKELY
+                                        </button>
+                                        <button
+                                            type="button"
+                                            class="btn btn-custom2"
+                                            data-show-element="#hourly_humidity_chart"
+                                        >
+                                            HOURLY
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="p-sm-3">
+                                <div id="weekely_humidity_chart"></div>
+                                <div id="hourly_humidity_chart" class="hide"></div>
+                            </div>
+                        </div>
+
+                        <!-- Air temp chart -->
+                        <div id="hourly_airTemperature_chart" class="hide col-lg-12 my-4">
+
+                        </div>
+
+                    </div>                
+                </div>            
+            </div>        
+        </div>
+    </body>
+</html>
